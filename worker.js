@@ -12,6 +12,32 @@ const headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/103.0.5060.134 Safari/537.36",
 };
 
+async function messageTelegram(message) {
+    try {
+        const TELEGRAM_MESSAGE_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        const messageTelegramResponse = await fetch(TELEGRAM_MESSAGE_URL, {
+            method: "POST",
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (!messageTelegramResponse.ok) {
+            console.error("Telegram messaging failed");
+        }
+    } catch (error) {
+        if (error instanceof ReferenceError) {
+            console.error(error);
+            console.log("Telegram messaging not activatied");
+        } else {
+            console.error(error);
+        }
+    }
+}
+
 async function login() {
     headers["referer"] = CLIENT_AREA;
     const resp = await fetch(LOGIN_URL, {
@@ -79,7 +105,11 @@ async function renewDomains(domainInfo) {
                 headers: headers,
             });
             const html = await resp.text();
-            console.log(domain, /Order Confirmation/i.test(html) ? "续期成功" : "续期失败");
+            const message = `${domain} ${
+                /Order Confirmation/i.test(html) ? "续期成功" : "续期失败"
+            }`;
+            await messageTelegram(message);
+            console.log(message);
         } else {
             console.log(`域名 ${domain} 还有 ${days} 天续期`);
         }
