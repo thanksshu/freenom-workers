@@ -1,8 +1,8 @@
 
-<h4 align="center">通过Cloudflare Workers自动续期Freenom域名(.cf .ga .gq .ml .tk)。</h4>
+<h4 align="center">Renew your Freenom domain (.cf .ga .gq .ml .tk) automaticly with Cloudflare Workers.</h4>
 
 <p align="center">
-  <a href="https://github.com/PencilNavigator/Freenom-Workers/blob/main/README_EN.md">English README</a>
+  <a href="https://github.com/PencilNavigator/freenom-workers/blob/main/README_zh.md">中文README</a>
   •
   <a href="https://github.com/PencilNavigator/Freenom-Workers/issues">Issues</a>
   •
@@ -11,74 +11,73 @@
   <a href="https://github.com/PencilNavigator/Freenom-Workers/discussions" target="_blank">Discussions</a>
 </p>
 <p align="center">
- 喜欢这个项目？给颗Star吧！
+ Like this project？ Star it!
 </p>
 
-## 部署
+## Set-up
 
-打开你的 [Cloudflare管理面板](https://dash.cloudflare.com)
-
-
-在账号主页左侧侧边栏选择Workers
+Open your [Cloudflare Dashboard](https://dash.cloudflare.com)
 
 
-在Workers页面，选择创建服务，设置好服务名称，选择HTTP处理程序。
+Select "Workers" in the left sidebar on the homepage.
 
 
-在刚刚创建的Workers界面，选择“快速编辑”。
+On the Workers tab，choose "Create a Service"，choose your service name，and select a starter (HTTP Handler)。
 
 
-在编辑界面，粘贴worker.js内代码，点击保存。
+On the Workers you just created, select "Quick edit".
 
 
-返回刚刚创建的Workers页面，选择“设置”，再选择“变量”。
+In the Quick edit interface, copy and paste the code in worker_EN.js and click Save.
 
 
-在变量页面，添加以下变量和变量值：
-
-- SECRET_USERNAME变量，填入Freenom用户名
-
-- SECRET_PASSWORD变量，填入Freenom密码
+Go back to the Workers page you just created and select "Settings" and then "Variables".
 
 
-（可选）勾选两个变量的“加密”选项（可极大程度降低Freenom用户名和密码泄露的概率）。
+On the variables page, add the following variable name and value.
+
+- SECRET_USERNAME" with your Freenom username.
+- SECRET_PASSWORD" with your Freenom password.
 
 
-返回创建的Workers页面，选择“触发器”。
+(Optional) Select the Encryption option for both variables to reduce the probability of leakage for your Freenom username and password.
 
 
-在触发器界面，选择添加Cron触发器。在“添加Cron触发器”界面，设置触发器，保存。推荐执行时间为一天一次。
+Return to the created Workers page and select Triggers.
 
 
-在同一界面的路由选项中禁用默认路由（通常为 服务名.子域名.workers.dev）。
+On the Trigger screen, click "Add Cron Trigger". On the Add Cron Trigger page, set up the trigger and save the Settings. The recommended execution time is once a day.
 
-## 测试
 
-（快速编辑-预览 访问）在快速编辑界面中的“预览”访问已部署的Workers。顺利的话，你将看到你账户内所有域名的剩余日期。
-_请注意，通过预览访问不会触发续期任务，仅用于测试是否可以获取账户内所有域名的剩余日期。_
+On the same interface, Disable the default route (e.g. servicename.subdomain.worker.dev) in Routes.
 
-（触发Cron）进入“快速编辑”，选择“设定时间”，再选择“触发计划的事件”。查看下方Console是否有输出域名剩余日期。（如有可续期的域名，会输出是否续期成功。）
 
-## 效果展示
-![图片](https://user-images.githubusercontent.com/85282140/207813815-99af2574-910d-40d1-908c-5f18de1a5648.png)
+## Test
 
-（2022/12/15测试）
+(Access through Quick edit) Access your deployed Workers service in the Quice edit interface. You should see the remaining dates of all domain names in your account.
+_Please note that access through preview does not trigger renewal. it should only be used for testing purposes._
 
-## 已知问题
+(Trigger scheduled event) Enter "Quick Edit", select "Set Time", and then select "Trigger scheduled event". You should see the console outputing the remaining date of the domain. (If a renewable domain is detected, the console will output renewal results.)
 
-请访问该[Wiki](https://github.com/PencilNavigator/freenom-workers/wiki/Known-Issues)页面。
+## Showcase
+![Image](https://user-images.githubusercontent.com/85282140/207813815-99af2574-910d-40d1-908c-5f18de1a5648.png)
 
-## 待实现的功能
+（Successfully renewed on 2022/12/15）
 
-请访问该[Wiki](https://github.com/PencilNavigator/freenom-workers/wiki/Planned-Enhancement)页面。
+## Known Issues
 
-## 类似项目
+Please check out this [Wiki](https://github.com/PencilNavigator/freenom-workers/wiki/Known-Issues) page.
+
+## Planned enhancement
+
+Please check out this [Wiki](https://github.com/PencilNavigator/freenom-workers/wiki/Planned-Enhancement) page.
+
+## Simliar Projects
 https://github.com/luolongfei/freenom (PHP)
 
 https://github.com/Oreomeow/freenom-py (Python)
 
-
 ## LICENSE
-目前没有决定好用什么LICENSE.
+Currently no LICENSE.
 
 <img title="mona-loading" alt="mona-loading" src="https://github.githubassets.com/images/mona-loading-dark.gif" width="100">
